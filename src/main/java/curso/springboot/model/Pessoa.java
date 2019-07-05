@@ -2,6 +2,7 @@ package curso.springboot.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,17 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	private String sobreNome;
+	
+	@Column(columnDefinition="int default 0") 
+	private int idade;
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
 
 	public Long getId() {
 		return id;
