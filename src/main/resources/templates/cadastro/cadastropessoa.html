@@ -5,46 +5,46 @@
 <title>Insert title here</title>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-<link type="text/css" rel="stylesheet" href="materialize/css/materialize.css" media="screen,projection"></link>
-<link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection"></link>
+<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css" media="screen,projection"></link>
+<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection"></link>
 
 </head>
 <body>
 <h1>CADASTRO DE PESSOA</h1>
 
-<form action="salvarpessoa" method="post">
+<form action="salvarpessoa" method="post" th:object="${pessoaobj}">
 
+<label>ID:</label>
+<input name="id" th:field="*{id}"></input>
 <label>Nome:</label>
-<input name="nome"></input>
-
+<input name="nome" th:field="*{nome}"></input>
 <label>Sobrenome:</label>
-<input name="sobreNome"></input>
-
+<input name="sobrenome" th:field="*{sobrenome}"></input>
 <label>Idade:</label>
-<input name="idade"></input>
+<input name="idade" th:field="*{idade}"></input>
 
 <a class="waves-effect waves-light btn"><input type="submit" value="Salvar"></input></a>
 
 <br/>
 <br/>
 
-
-
 </form>
 
-<a href="listapessoas">Listar Pessoas</a>
+<a href="/listapessoas">Listar Pessoas</a>
 
 <table>
 <tr th:each = "pessoa : ${pessoas}">
 	<td th:text = "${pessoa.id}"></td>
 	<td th:text = "${pessoa.nome}"></td>
-	<td th:text = "${pessoa.sobreNome}"></td>
+	<td th:text = "${pessoa.sobrenome}"></td>
 	<td th:text = "${pessoa.idade}"></td>
+	<td><a th:href = "@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+	<td><a th:href = "@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
 </tr>
 </table>
 
 
-<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-<script type="text/javascript" src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="/materialize/js/materialize.js"></script>
 </body>
 </html>
