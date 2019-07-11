@@ -16,16 +16,39 @@ table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(158, 154, 154, 0.5);
 }
 
+#margemGeral { 
+    margin-top: 15px; 
+    margin-right: 10px;
+    margin-bottom: 25px;
+    margin-left: 35px;
+}
+
 form input[type=submit]{
 color: white;
 }
 
+#textoValidacao{
+color: red;
+}
+
 </style>
 </head>
-<body>
+<body id="margemGeral">
 	<h4>CADASTRO DE PESSOA</h4>
 
+	<a class="waves-effect waves-light btn" href="http://localhost:8080">Início</a>
+
 	<div class="row">
+	
+	<br/>
+	
+	<div th:each = "m : ${msg}">
+		<span th:text = "${m}" id="textoValidacao"></span>
+	
+	</div>
+	
+	<br/>
+	
 		<form action="salvarpessoa" id="formpessoa" method="post" th:object="${pessoaobj}"
 			class="col s12">
 
@@ -60,7 +83,7 @@ color: white;
 				<div class="input-field col s6">
 					<a class="waves-effect waves-light btn"><input type="submit"
 						value="Salvar"></input></a>
-					<button class="waves-effect waves-light btn" onclick="document.getElementById('formpessoa'.reset());">Novo</button>	
+					<button class="waves-effect waves-light btn">Novo</button>	
 				</div>
 			</div>
 		</form>
@@ -102,7 +125,6 @@ color: white;
 				th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
 		</tr>
 	</table>
-
 
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.js"></script>
