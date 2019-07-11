@@ -16,6 +16,10 @@ table.striped>tbody>tr:nth-child(odd) {
     background-color: rgba(158, 154, 154, 0.5);
 }
 
+#textoValidacao{
+color: red;
+}
+
 #margemGeral { 
     margin-top: 15px; 
     margin-right: 10px;
@@ -44,17 +48,22 @@ color: white;
 	
 	<h4>Telefones</h4>
 	
+		<div th:each = "m : ${msg}">
+		<span th:text = "${m}" id="textoValidacao"></span>
+	
+	</div>
+	
 	<div class="row">
 	<form th:action="@{/addfonepessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
 	<div class="row">
 		<div class="input-field col s6">
 			<label class="active" for="numero">Número:	</label>
-			<input id="numero" name="numero" type="text" class="validate"></input>
+			<input id="numero" name="numero" type="text" class="validate" required="required"></input>
 		</div>
 		
 		<div class="input-field col s6">
 			<label class="active" for="numero">Tipo:	</label>
-			<input id="tipo" name="tipo" type="text" class="validate"></input>
+			<input id="tipo" name="tipo" type="text" class="validate" required="required"></input>
 		</div>
 		
 		<input type="submit" value="Adicionar" class="waves-effect waves-light btn"></input>
