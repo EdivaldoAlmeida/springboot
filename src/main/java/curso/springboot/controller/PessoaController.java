@@ -23,14 +23,14 @@ public class PessoaController {
 	public ModelAndView inicio() {
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoaobj", new Pessoa());
+		modelAndView.addObject("pessoas", pessoaRepository.findAll()); /*Essas duas linhas carregam todas*/
+		modelAndView.addObject("pessoaobj", new Pessoa());			/*as pessoas ao abrir a tela de cadastro*/
 		return modelAndView;
 	}
-
 	
 	/*Resumo do método salvar: Sempre que o o botão "salvarpessoa" for clicado o método intercepta a requisição, 
 	 * pega os dados do formulátio (por isso ele recebe um parâmetro pessoa) e envia esses dados ao DB, sempre
 	 * utilizando a Interface PessoaRepository. Como retorno, ele redireciona o fluxo para a página "cadastro/cadastropessoa"
-	 * 
 	 * */
 	@RequestMapping(method = RequestMethod.POST, value = "**/salvarpessoa") /*Os dois ** ignoram tudo que vem antes de salvarpessoa*/
 	public ModelAndView salvar(Pessoa pessoa) {
@@ -86,6 +86,17 @@ public class PessoaController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
 		modelAndView.addObject("pessoaobj", new Pessoa());
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/telefones/{idpessoa}") /*Intercepta os telefones*/
+	public ModelAndView telefones(@PathVariable("idpessoa") Long idpessoa) {
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones"); /*Retorna para telefones*/
+		Pessoa pessoa = pessoaRepository.findOne(idpessoa);
+		modelAndView.addObject("pessoaobj", pessoa);
+		
 		return modelAndView;
 
 	}
