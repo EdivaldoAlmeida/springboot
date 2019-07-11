@@ -122,5 +122,19 @@ public class PessoaController {
 		return modelAndView;
 	}
 	
+	@GetMapping("/removertelefone/{idtelefone}")
+	public ModelAndView removerTelefone(@PathVariable("idtelefone") Long idtelefone) {
+		
+		Pessoa pessoa = telefoneRepository.findOne(idtelefone).getPessoa();
+		telefoneRepository.delete(idtelefone);
+		
+		/*Após deletar ele retorna para a mesma tela de cadastro e carrega todos os telefones da pessoas*/
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoa.getId()));
+		return modelAndView;
+
+	}
+	
 
 }
